@@ -1,0 +1,18 @@
+secret = rand(1..100)
+attempts = 0
+
+puts "Guess a number between 1 and 100"
+
+loop do
+  guess = gets.chomp.to_i
+  attempts += 1
+
+  if guess == secret
+    puts "Correct! Attempts: #{attempts}"
+    break
+  elsif guess < secret
+    puts "Too low!"
+  else
+    puts "Too high!"
+  end
+end
