@@ -1,0 +1,23 @@
+puts "Enter first number:"
+a = gets.chomp.to_f
+
+puts "Enter operator (+ - * /):"
+op = gets.chomp
+
+puts "Enter second number:"
+b = gets.chomp.to_f
+
+result = case op
+         when "+"
+           a + b
+         when "-"
+           a - b
+         when "*"
+           a * b
+         when "/"
+           b != 0 ? a / b : "Cannot divide by zero"
+         else
+           "Invalid operator"
+         end
+
+puts "Result: #{result}"
