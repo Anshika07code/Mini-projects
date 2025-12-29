@@ -1,0 +1,57 @@
+students = []
+
+def add_student(students)
+  print "Enter Roll No: "
+  roll = gets.chomp
+  print "Enter Name: "
+  name = gets.chomp
+  print "Enter Marks: "
+  marks = gets.chomp.to_i
+
+  students << { roll: roll, name: name, marks: marks }
+  puts "Student added successfully!\n\n"
+end
+
+def view_students(students)
+  puts "\n--- Student List ---"
+  students.each do |s|
+    puts "Roll: #{s[:roll]}, Name: #{s[:name]}, Marks: #{s[:marks]}"
+  end
+  puts
+end
+
+def search_student(students)
+  print "Enter Roll No to search: "
+  roll = gets.chomp
+
+  student = students.find { |s| s[:roll] == roll }
+  if student
+    puts "Found: #{student}"
+  else
+    puts "Student not found!"
+  end
+end
+
+loop do
+  puts "1. Add Student"
+  puts "2. View Students"
+  puts "3. Search Student"
+  puts "4. Exit"
+  print "Choose option: "
+
+  choice = gets.chomp.to_i
+
+  case choice
+  when 1
+    add_student(students)
+  when 2
+    view_students(students)
+  when 3
+    search_student(students)
+  when 4
+    puts "Goodbye!"
+    break
+  else
+    puts "Invalid choice!"
+  end
+end
