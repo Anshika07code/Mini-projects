@@ -1,0 +1,26 @@
+tasks = []
+
+loop do
+  puts "\n1. Add Task"
+  puts "2. View Tasks"
+  puts "3. Exit"
+  print "Choice: "
+
+  choice = gets.chomp.to_i
+
+  case choice
+  when 1
+    print "Enter task: "
+    tasks << gets.chomp
+    puts "Task added!"
+  when 2
+    puts "\nYour Tasks:"
+    tasks.each_with_index do |task, i|
+      puts "#{i+1}. #{task}"
+    end
+  when 3
+    break
+  else
+    puts "Invalid option!"
+  end
+end
