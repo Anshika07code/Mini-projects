@@ -1,0 +1,73 @@
+FILE_NAME = "students.txt"
+
+def add_student
+  print "Enter Roll No: "
+  roll = gets.chomp
+  print "Enter Name: "
+  name = gets.chomp
+  print "Enter Marks: "
+  marks = gets.chomp
+
+  File.open(FILE_NAME, "a") do |file|
+    file.puts("#{roll},#{name},#{marks}")
+  end
+
+  puts "Student added successfully!\n"
+end
+
+def view_students
+  if !File.exist?(FILE_NAME)
+    puts "No student records found!"
+    return
+  end
+
+  puts "\n--- Student Records ---"
+  File.readlines(FILE_NAME).each do |line|
+    roll, name, marks = line.chomp.split(",")
+    puts "Roll: #{roll}, Name: #{name}, Marks: #{marks}"
+  end
+  puts
+end
+
+def search_student
+  print "Enter Roll No to search: "
+  search_roll = gets.chomp
+  found = false
+
+  if File.exist?(FILE_NAME)
+    File.readlines(FILE_NAME).each do |line|
+      roll, name, marks = line.chomp.split(",")
+      if roll == search_roll
+        puts "Student Found → Roll: #{roll}, Name: #{name}, Marks: #{marks}"
+        found = true
+        break
+      end
+    end
+  end
+
+  puts "Student not found!" unless found
+end
+
+loop do
+  puts "\n1. Add Student"
+  puts "2. View Students"
+  puts "3. Search Student"
+  puts "4. Exit"
+  print "Choose option: "
+
+  choice = gets.chomp.to_i
+
+  case choice
+  when 1
+    add_student
+  when 2
+    view_students
+  when 3
+    search_student
+  when 4
+    puts "Exiting program..."
+    break
+  else
+    puts "Invalid choice!"
+  end
+end
