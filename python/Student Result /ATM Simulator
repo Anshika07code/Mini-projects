@@ -1,0 +1,27 @@
+balance = 10000
+
+while True:
+    print("\n1. Check Balance\n2. Deposit\n3. Withdraw\n4. Exit")
+    choice = int(input("Choose option: "))
+
+    if choice == 1:
+        print("Balance:", balance)
+
+    elif choice == 2:
+        amount = int(input("Enter amount to deposit: "))
+        balance += amount
+        print("Deposit successful")
+
+    elif choice == 3:
+        amount = int(input("Enter amount to withdraw: "))
+        if amount <= balance:
+            balance -= amount
+            print("Withdrawal successful")
+        else:
+            print("Insufficient balance")
+
+    elif choice == 4:
+        break
+
+    else:
+        print("Invalid choice")
