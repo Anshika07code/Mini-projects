@@ -1,0 +1,7 @@
+int histogram[256] = {0};
+
+// Assume 'image_data' is a 1D array of a grayscale image
+for (int i = 0; i < width * height; i++) {
+    int pixel_value = image_data[i];
+    histogram[pixel_value]++;
+}
