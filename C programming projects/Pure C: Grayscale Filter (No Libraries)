@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void convertToGrayscale(const char* input, const char* output) {
+    FILE *fpIn = fopen(input, "r");
+    FILE *fpOut = fopen(output, "w");
+
+    if (!fpIn || !fpOut) return;
+
+    char header[3];
+    int width, height, maxVal;
+
+    // Read PPM Header: Magic Number, Width, Height, Max Color Value
+    fscanf(fpIn, "%s %d %d %d", header, &width, &height, &maxVal);
+    
+    // Write Header to Output
+    fprintf(fpOut, "P3\n%d %d\n%d\n", width, height, maxVal);
+
+    int r, g, b;
+    while (fscanf(fpIn, "%d %d %d", &r, &g, &b) != EOF) {
+        // Standard Grayscale Formula: 0.299R + 0.587G + 0.114B
+        int gray = (int)(0.299 * r + 0.587 * g + 0.114 * b);
+        fprintf(fpOut, "%d %d %d ", gray, gray, gray);
+    }
+
+    fclose(fpIn);
+    fclose(fpOut);
+}
