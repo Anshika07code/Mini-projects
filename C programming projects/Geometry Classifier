@@ -1,0 +1,54 @@
+#include <opencv2/opencv.h>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc/imgproc_c.h>
+
+int main() {
+    CvCapture* capture = cvCaptureFromCAM(0);
+    IplImage* frame;
+    CvMemStorage* storage = cvCreateMemStorage(0);
+
+    while (1) {
+        frame = cvQueryFrame(capture);
+        if (!frame) break;
+
+        // 1. Pre-process: Grayscale -> Blur -> Canny Edges
+        IplImage* gray = cvCreateImage(cvGetSize(frame), 8, 1);
+        cvCvtColor(frame, gray, CV_BGR2GRAY);
+        cvSmooth(gray, gray, CV_GAUSSIAN, 3, 3, 0, 0);
+        cvCanny(gray, gray, 50, 150, 3);
+
+        // 2. Find Contours
+        CvSeq* contours = 0;
+        cvFindContours(gray, storage, &contours, sizeof(CvContour), CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cvPoint(0,0));
+
+        while (contours) {
+            // 3. Approximate the shape
+            // Accuracy is set to 2% of the perimeter
+            CvSeq* result = cvApproxPoly(contours, sizeof(CvContour), storage, CV_POLY_APPROX_DP, cvContourPerimeter(contours) * 0.02, 0);
+
+            // 4. Test corner counts
+            if (result->total == 3) {
+                // It's a triangle
+                cvDrawContours(frame, result, cvScalar(255,0,0,0), cvScalar(255,0,0,0), 0, 2, 8, cvPoint(0,0));
+            } else if (result->total == 4) {
+                // It's a square/rectangle
+                cvDrawContours(frame, result, cvScalar(0,255,0,0), cvScalar(0,255,0,0), 0, 2, 8, cvPoint(0,0));
+            } else if (result->total > 7) {
+                // It's likely a circle
+                cvDrawContours(frame, result, cvScalar(0,0,255,0), cvScalar(0,0,255,0), 0, 2, 8, cvPoint(0,0));
+            }
+
+            contours = contours->h_next;
+        }
+
+        cvShowImage("Shape Detection", frame);
+        cvClearMemStorage(storage);
+        cvReleaseImage(&gray);
+
+        if (cvWaitKey(30) == 27) break;
+    }
+
+    cvReleaseCapture(&capture);
+    cvReleaseMemStorage(&storage);
+    return 0;
+}
