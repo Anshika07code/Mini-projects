@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct contact {
+    char name[30];
+    char phone[15];
+};
+
+int main() {
+    struct contact c;
+    FILE *fp;
+    int choice;
+
+    do {
+        printf("\n--- Contact Book ---\n");
+        printf("1. Add Contact\n");
+        printf("2. View Contacts\n");
+        printf("3. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                fp = fopen("contacts.txt", "a");
+                printf("Enter Name: ");
+                scanf("%s", c.name);
+                printf("Enter Phone: ");
+                scanf("%s", c.phone);
+                fwrite(&c, sizeof(c), 1, fp);
+                fclose(fp);
+                printf("Contact Saved!\n");
+                break;
+
+            case 2:
+                fp = fopen("contacts.txt", "r");
+                if(fp == NULL) {
+                    printf("No contacts found.\n");
+                } else {
+                    printf("\n--- Contact List ---\n");
+                    while(fread(&c, sizeof(c), 1, fp))
+                        printf("Name: %s | Phone: %s\n", c.name, c.phone);
+                    fclose(fp);
+                }
+                break;
+
+            case 3:
+                printf("Goodbye!\n");
+                break;
+
+            default:
+                printf("Invalid choice\n");
+        }
+    } while(choice != 3);
+
+    return 0;
+}
