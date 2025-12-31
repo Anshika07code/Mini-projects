@@ -1,0 +1,34 @@
+#include <opencv2/opencv.h>
+#include <opencv2/highgui/highgui_c.h>
+
+int main() {
+    // 0 is the default webcam
+    CvCapture* capture = cvCaptureFromCAM(0);
+    if (!capture) return -1;
+
+    cvNamedWindow("Edges", CV_WINDOW_AUTOSIZE);
+
+    while (1) {
+        IplImage* frame = cvQueryFrame(capture); // Grab frame
+        if (!frame) break;
+
+        // Create a buffer for the edges
+        IplImage* gray = cvCreateImage(cvGetSize(frame), IPL_DEPTH_8U, 1);
+        IplImage* edges = cvCreateImage(cvGetSize(frame), IPL_DEPTH_8U, 1);
+
+        cvCvtColor(frame, gray, CV_BGR2GRAY);    // RGB to Gray
+        cvCanny(gray, edges, 50, 150, 3);        // Canny Edge Detection
+
+        cvShowImage("Edges", edges);
+
+        if (cvWaitKey(10) == 27) break; // Exit on ESC
+
+        // Clean up memory to avoid leaks!
+        cvReleaseImage(&gray);
+        cvReleaseImage(&edges);
+    }
+
+    cvReleaseCapture(&capture);
+    cvDestroyWindow("Edges");
+    return 0;
+}
