@@ -1,0 +1,15 @@
+// High-performance pixel access in C
+uchar* data = (uchar*)frame->imageData;
+int step = frame->widthStep;
+int channels = frame->nChannels;
+
+for(int i=0; i < frame->height; i++) {
+    for(int j=0; j < frame->width; j++) {
+        // Access Blue channel of pixel at (i, j)
+        uchar b = data[i * step + j * channels + 0];
+        // Access Green
+        uchar g = data[i * step + j * channels + 1];
+        // Access Red
+        uchar r = data[i * step + j * channels + 2];
+    }
+}
