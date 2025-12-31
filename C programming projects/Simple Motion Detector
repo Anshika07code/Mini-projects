@@ -1,0 +1,49 @@
+#include <opencv2/opencv.h>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc/imgproc_c.h>
+
+int main() {
+    CvCapture* capture = cvCaptureFromCAM(0);
+    if (!capture) return -1;
+
+    IplImage *frame1, *frame2, *gray1, *gray2, *diff;
+    cvNamedWindow("Motion Detector", CV_WINDOW_AUTOSIZE);
+
+    while (1) {
+        // 1. Capture two frames
+        frame1 = cvQueryFrame(capture);
+        if (!frame1) break;
+        
+        // We need to clone the first frame because cvQueryFrame reuses memory
+        gray1 = cvCreateImage(cvGetSize(frame1), IPL_DEPTH_8U, 1);
+        cvCvtColor(frame1, gray1, CV_BGR2GRAY);
+
+        cvWaitKey(10); // Tiny delay to allow for motion
+
+        frame2 = cvQueryFrame(capture);
+        gray2 = cvCreateImage(cvGetSize(frame2), IPL_DEPTH_8U, 1);
+        cvCvtColor(frame2, gray2, CV_BGR2GRAY);
+
+        // 2. Calculate Difference
+        diff = cvCreateImage(cvGetSize(frame1), IPL_DEPTH_8U, 1);
+        cvAbsDiff(gray1, gray2, diff); // diff = |gray1 - gray2|
+
+        // 3. Threshold (Apply a "Cutoff" for noise)
+        // Values above 30 become 255 (white), below become 0 (black)
+        cvThreshold(diff, diff, 30, 255, CV_THRESH_BINARY);
+
+        // 4. Show results
+        cvShowImage("Motion Detector", diff);
+
+        // Cleanup current loop memory
+        cvReleaseImage(&gray1);
+        cvReleaseImage(&gray2);
+        cvReleaseImage(&diff);
+
+        if (cvWaitKey(30) == 27) break; // Exit on ESC
+    }
+
+    cvReleaseCapture(&capture);
+    cvDestroyWindow("Motion Detector");
+    return 0;
+}
