@@ -1,0 +1,72 @@
+#include <opencv2/opencv.h>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc/imgproc_c.h>
+
+#define MAX_POINTS 500
+
+typedef struct {
+    int x;
+    int y;
+} Point;
+
+int main() {
+    CvCapture* capture = cvCaptureFromCAM(0);
+    IplImage* canvas = NULL; // This will hold our "drawings"
+    Point trail[MAX_POINTS];
+    int point_count = 0;
+
+    while (1) {
+        IplImage* frame = cvQueryFrame(capture);
+        if (!frame) break;
+
+        // Initialize canvas on the first frame
+        if (canvas == NULL) {
+            canvas = cvCreateImage(cvGetSize(frame), 8, 3);
+            cvSetZero(canvas);
+        }
+
+        // --- STEP 1: Track the Object (Simplified) ---
+        IplImage* hsv = cvCreateImage(cvGetSize(frame), 8, 3);
+        cvCvtColor(frame, hsv, CV_BGR2HSV);
+        
+        IplImage* mask = cvCreateImage(cvGetSize(frame), 8, 1);
+        cvInRangeS(hsv, cvScalar(40, 100, 100, 0), cvScalar(80, 255, 255, 0), mask);
+
+        CvMoments moments;
+        cvMoments(mask, &moments, 1);
+        double area = cvGetCentralMoment(&moments, 0, 0);
+
+        if (area > 500) {
+            int posX = cvGetSpatialMoment(&moments, 1, 0) / area;
+            int posY = cvGetSpatialMoment(&moments, 0, 1) / area;
+
+            // Store point in our C array
+            if (point_count < MAX_POINTS) {
+                trail[point_count].x = posX;
+                trail[point_count].y = posY;
+                point_count++;
+            }
+        }
+
+        // --- STEP 2: Draw the Trail ---
+        for (int i = 1; i < point_count; i++) {
+            cvLine(frame, 
+                   cvPoint(trail[i-1].x, trail[i-1].y), 
+                   cvPoint(trail[i].x, trail[i].y), 
+                   cvScalar(0, 255, 255, 0), 3, 8, 0);
+        }
+
+        cvShowImage("Virtual Pen", frame);
+
+        // Reset: Press 'C' to clear the drawing
+        int key = cvWaitKey(10);
+        if (key == 'c') point_count = 0; 
+        if (key == 27) break;
+
+        cvReleaseImage(&hsv);
+        cvReleaseImage(&mask);
+    }
+
+    cvReleaseCapture(&capture);
+    return 0;
+}
