@@ -1,0 +1,46 @@
+#include <opencv2/opencv.h>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/video/background_segm.h>
+
+int main() {
+    CvCapture* capture = cvCaptureFromCAM(0);
+    if (!capture) return -1;
+
+    // Create the Background Subtractor object (MOG2 is a robust GMM-based algorithm)
+    // In the C API, we use the BackgroundSubtractorMOG2 interface
+    CvBGStatModel* bg_model = cvCreateGaussianBGModel(cvQueryFrame(capture), NULL);
+
+    cvNamedWindow("Original", 1);
+    cvNamedWindow("Foreground Mask", 1);
+
+    while (1) {
+        IplImage* frame = cvQueryFrame(capture);
+        if (!frame) break;
+
+        // Update the model and extract the foreground
+        cvUpdateBGStatModel(frame, bg_model, -1);
+
+        // bg_model->foreground is a binary mask (white = person, black = background)
+        IplImage* mask = bg_model->foreground;
+
+        // Optional: Clean up noise using "Erosion" (removes small white dots)
+        // and "Dilation" (fills holes in the detected person)
+        cvErode(mask, mask, NULL, 1);
+        cvDilate(mask, mask, NULL, 2);
+
+        // Apply a "Virtual Background" (Example: make background black)
+        IplImage* result = cvCreateImage(cvGetSize(frame), 8, 3);
+        cvSetZero(result);
+        cvCopy(frame, result, mask); // Only copy pixels where mask is white
+
+        cvShowImage("Original", frame);
+        cvShowImage("Foreground Mask", result);
+
+        if (cvWaitKey(30) == 27) break;
+        cvReleaseImage(&result);
+    }
+
+    cvReleaseBGStatModel(&bg_model);
+    cvReleaseCapture(&capture);
+    return 0;
+}
