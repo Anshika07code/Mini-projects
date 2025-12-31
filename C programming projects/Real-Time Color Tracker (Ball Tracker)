@@ -1,0 +1,53 @@
+#include <opencv2/opencv.h>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc/imgproc_c.h>
+
+int main() {
+    CvCapture* capture = cvCaptureFromCAM(0);
+    if (!capture) return -1;
+
+    cvNamedWindow("Original", 1);
+    cvNamedWindow("Thresh", 1);
+
+    while (1) {
+        IplImage* frame = cvQueryFrame(capture);
+        if (!frame) break;
+
+        // 1. Convert BGR to HSV (HSV is better for color isolation)
+        IplImage* hsv_frame = cvCreateImage(cvGetSize(frame), 8, 3);
+        cvCvtColor(frame, hsv_frame, CV_BGR2HSV);
+
+        // 2. Define the color range (Example: Bright Green)
+        // Values: Hue (0-180), Saturation (0-255), Value (0-255)
+        CvScalar lower = cvScalar(40, 100, 100, 0); 
+        CvScalar upper = cvScalar(80, 255, 255, 0);
+
+        IplImage* thresh_frame = cvCreateImage(cvGetSize(frame), 8, 1);
+        cvInRangeS(hsv_frame, lower, upper, thresh_frame);
+
+        // 3. Find the "Center of Mass" (Moments)
+        CvMoments moments;
+        cvMoments(thresh_frame, &moments, 1);
+        double m10 = cvGetSpatialMoment(&moments, 1, 0);
+        double m01 = cvGetSpatialMoment(&moments, 0, 1);
+        double area = cvGetCentralMoment(&moments, 0, 0);
+
+        // If the "blob" is big enough, draw a circle at the center
+        if (area > 500) {
+            int posX = m10 / area;
+            int posY = m01 / area;
+            cvCircle(frame, cvPoint(posX, posY), 20, cvScalar(0, 0, 255, 0), 2, 8, 0);
+        }
+
+        cvShowImage("Original", frame);
+        cvShowImage("Thresh", thresh_frame);
+
+        cvReleaseImage(&hsv_frame);
+        cvReleaseImage(&thresh_frame);
+
+        if (cvWaitKey(33) == 27) break;
+    }
+
+    cvReleaseCapture(&capture);
+    return 0;
+}
