@@ -1,0 +1,8 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+gray = img.BGR2GRAY
+
+GUI::Window.new("Gray Image").show(gray)
+GUI::wait_key
