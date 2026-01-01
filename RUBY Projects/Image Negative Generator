@@ -1,0 +1,10 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+negative = CvMat.new(img.rows, img.cols, img.type)
+
+negative = CvScalar.new(255, 255, 255) - img
+
+GUI::Window.new("Negative Image").show(negative)
+GUI::wait_key
