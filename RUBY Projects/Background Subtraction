@@ -1,0 +1,15 @@
+require 'opencv'
+include OpenCV
+
+cam = CvCapture.open
+bg = cam.query.gray
+
+loop do
+  frame = cam.query
+  gray = frame.gray
+  diff = gray.absdiff(bg)
+  thresh = diff.threshold(40, 255, :binary)
+
+  GUI::Window.new("Background Subtraction").show(thresh)
+  break if GUI::wait_key(30) == 27
+end
