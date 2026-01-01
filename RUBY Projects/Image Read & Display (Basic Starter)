@@ -1,0 +1,6 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+GUI::Window.new("Image").show(img)
+GUI::wait_key
