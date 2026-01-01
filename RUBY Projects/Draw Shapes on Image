@@ -1,0 +1,10 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+
+img.rectangle!(CvPoint.new(50, 50), CvPoint.new(200, 200), color: CvColor::Red, thickness: 2)
+img.circle!(CvPoint.new(300, 200), 50, color: CvColor::Blue, thickness: 3)
+
+GUI::Window.new("Shapes").show(img)
+GUI::wait_key
