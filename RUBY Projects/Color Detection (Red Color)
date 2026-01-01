@@ -1,0 +1,12 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+hsv = img.BGR2HSV
+
+lower = CvScalar.new(0, 100, 100)
+upper = CvScalar.new(10, 255, 255)
+
+mask = hsv.in_range(lower, upper)
+GUI::Window.new("Red Color").show(mask)
+GUI::wait_key
