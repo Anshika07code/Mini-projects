@@ -1,1 +1,9 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+blur = img.smooth(CV_GAUSSIAN, 15, 15)
+
+GUI::Window.new("Blur Image").show(blur)
+GUI::wait_key
 
