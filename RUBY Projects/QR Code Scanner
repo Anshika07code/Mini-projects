@@ -1,0 +1,8 @@
+require 'opencv'
+include OpenCV
+
+detector = CvQRCodeDetector.new
+img = CvMat.load("qr.png")
+
+text, points = detector.detect_and_decode(img)
+puts "QR Code Data: #{text}"
