@@ -1,0 +1,8 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+resized = img.resize(CvSize.new(300, 300))
+
+GUI::Window.new("Resized Image").show(resized)
+GUI::wait_key
