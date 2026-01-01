@@ -1,0 +1,8 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+gray = img.BGR2GRAY
+gray.save("output_gray.jpg")
+
+puts "Image saved successfully!"
