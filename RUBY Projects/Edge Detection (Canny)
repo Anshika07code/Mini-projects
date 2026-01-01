@@ -1,0 +1,9 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+gray = img.BGR2GRAY
+edges = gray.canny(50, 150)
+
+GUI::Window.new("Edges").show(edges)
+GUI::wait_key
