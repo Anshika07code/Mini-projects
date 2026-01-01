@@ -1,0 +1,8 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+flip = img.flip(1)
+
+GUI::Window.new("Flipped Image").show(flip)
+GUI::wait_key
