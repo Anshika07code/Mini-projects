@@ -1,0 +1,16 @@
+require 'opencv'
+include OpenCV
+
+cam = CvCapture.open
+prev = cam.query.gray
+
+loop do
+  frame = cam.query
+  gray = frame.gray
+  diff = gray.absdiff(prev)
+  thresh = diff.threshold(30, 255, :binary)
+
+  GUI::Window.new("Motion").show(thresh)
+  prev = gray
+  break if GUI::wait_key(30) == 27
+end
