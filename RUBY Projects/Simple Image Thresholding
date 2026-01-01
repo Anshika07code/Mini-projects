@@ -1,0 +1,8 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg").BGR2GRAY
+th = img.threshold(127, 255, :binary)
+
+GUI::Window.new("Threshold").show(th)
+GUI::wait_key
