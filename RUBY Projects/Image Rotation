@@ -1,0 +1,10 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+center = CvPoint.new(img.cols / 2, img.rows / 2)
+matrix = CvMat.rotation_matrix2D(center, 45, 1.0)
+
+rotated = img.warp_affine(matrix)
+GUI::Window.new("Rotated Image").show(rotated)
+GUI::wait_key
