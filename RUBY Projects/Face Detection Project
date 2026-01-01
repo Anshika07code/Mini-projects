@@ -1,0 +1,15 @@
+require 'opencv'
+include OpenCV
+
+detector = CvHaarClassifierCascade::load("haarcascade_frontalface_default.xml")
+img = CvMat.load("face.jpg")
+gray = img.BGR2GRAY
+
+faces = detector.detect_objects(gray)
+
+faces.each do |f|
+  img.rectangle!(f.top_left, f.bottom_right, color: CvColor::Blue, thickness: 2)
+end
+
+GUI::Window.new("Face Detection").show(img)
+GUI::wait_key
