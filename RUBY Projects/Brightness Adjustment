@@ -1,0 +1,8 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+bright = img + CvScalar.new(50, 50, 50)
+
+GUI::Window.new("Bright Image").show(bright)
+GUI::wait_key
