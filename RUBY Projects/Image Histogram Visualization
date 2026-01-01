@@ -1,0 +1,7 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg").BGR2GRAY
+hist = img.calc_hist([256], [0..255])
+
+puts hist
