@@ -1,0 +1,8 @@
+require 'opencv'
+include OpenCV
+
+img = CvMat.load("image.jpg")
+contrast = img * 1.5
+
+GUI::Window.new("High Contrast").show(contrast)
+GUI::wait_key
