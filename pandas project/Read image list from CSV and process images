@@ -1,0 +1,13 @@
+import cv2
+import pandas as pd
+
+# CSV: image_path,label
+df = pd.read_csv("images.csv")
+
+for i, row in df.iterrows():
+    img = cv2.imread(row["image_path"])
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    cv2.imshow(row["label"], gray)
+    cv2.waitKey(500)
+
+cv2.destroyAllWindows()
