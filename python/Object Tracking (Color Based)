@@ -1,0 +1,17 @@
+import cv2, numpy as np
+
+cap = cv2.VideoCapture(0)
+while True:
+    _,img = cap.read()
+    hsv = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+
+    low = np.array([100,150,0])
+    high = np.array([140,255,255])
+    mask = cv2.inRange(hsv,low,high)
+
+    cv2.imshow("Tracking",mask)
+    if cv2.waitKey(1)==27:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
