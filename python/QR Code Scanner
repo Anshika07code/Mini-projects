@@ -1,0 +1,17 @@
+import cv2
+
+cap = cv2.VideoCapture(0)
+detector = cv2.QRCodeDetector()
+
+while True:
+    _, img = cap.read()
+    data,_,_ = detector.detectAndDecode(img)
+    if data:
+        print("QR Data:", data)
+
+    cv2.imshow("QR", img)
+    if cv2.waitKey(1)==27:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
