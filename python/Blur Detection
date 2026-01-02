@@ -1,0 +1,6 @@
+import cv2
+
+img = cv2.imread("img.jpg",0)
+score = cv2.Laplacian(img,cv2.CV_64F).var()
+
+print("Blur Score:", score)
