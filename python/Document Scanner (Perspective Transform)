@@ -1,0 +1,12 @@
+import cv2
+import numpy as np
+
+img = cv2.imread("doc.jpg")
+pts1 = np.float32([[50,50],[450,50],[50,600],[450,600]])
+pts2 = np.float32([[0,0],[300,0],[0,500],[300,500]])
+
+matrix = cv2.getPerspectiveTransform(pts1,pts2)
+scan = cv2.warpPerspective(img,matrix,(300,500))
+
+cv2.imshow("Scanned",scan)
+cv2.waitKey(0)
