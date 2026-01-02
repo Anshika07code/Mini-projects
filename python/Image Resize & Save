@@ -1,0 +1,5 @@
+import cv2
+
+img = cv2.imread("img.jpg")
+resized = cv2.resize(img,(300,300))
+cv2.imwrite("output.jpg", resized)
