@@ -1,0 +1,13 @@
+import cv2
+import pandas as pd
+import os
+
+data = []
+
+for file in os.listdir("images"):
+    img = cv2.imread(f"images/{file}")
+    h, w, c = img.shape
+    data.append([file, h, w, c])
+
+df = pd.DataFrame(data, columns=["Image", "Height", "Width", "Channels"])
+print(df)
