@@ -1,0 +1,32 @@
+import cv2
+import pandas as pd
+from datetime import datetime
+
+cap = cv2.VideoCapture(0)
+motion_data = []
+
+ret, frame1 = cap.read()
+ret, frame2 = cap.read()
+
+while cap.isOpened():
+    diff = cv2.absdiff(frame1, frame2)
+    gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (5,5), 0)
+    _, thresh = cv2.threshold(blur, 20, 255, cv2.THRESH_BINARY)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    if contours:
+        motion_data.append(datetime.now())
+
+    cv2.imshow("Motion", thresh)
+    frame1 = frame2
+    ret, frame2 = cap.read()
+
+    if cv2.waitKey(10) == 27:
+        break
+
+df = pd.DataFrame(motion_data, columns=["Motion Time"])
+df.to_csv("motion_log.csv", index=False)
+
+cap.release()
+cv2.destroyAllWindows()
