@@ -1,0 +1,12 @@
+import cv2
+
+plate = cv2.CascadeClassifier("haarcascade_russian_plate_number.xml")
+img = cv2.imread("car.jpg")
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+plates = plate.detectMultiScale(gray,1.1,4)
+
+for (x,y,w,h) in plates:
+    cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
+
+cv2.imshow("Plate", img)
+cv2.waitKey(0)
