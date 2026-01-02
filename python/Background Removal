@@ -1,0 +1,15 @@
+import cv2
+import numpy as np
+
+img = cv2.imread("img.jpg")
+mask = np.zeros(img.shape[:2],np.uint8)
+
+bg = np.zeros((1,65),np.float64)
+fg = np.zeros((1,65),np.float64)
+
+rect = (50,50,400,400)
+cv2.grabCut(img,mask,rect,bg,fg,5,cv2.GC_INIT_WITH_RECT)
+mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
+
+cv2.imshow("BG Removed",img*mask2[:,:,None])
+cv2.waitKey(0)
