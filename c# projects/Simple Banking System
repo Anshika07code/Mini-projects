@@ -1,0 +1,26 @@
+using System;
+
+class Bank
+{
+    static void Main()
+    {
+        double balance = 5000;
+        Console.WriteLine("1.Deposit 2.Withdraw");
+        int ch = Convert.ToInt32(Console.ReadLine());
+
+        if (ch == 1)
+        {
+            Console.Write("Amount: ");
+            balance += Convert.ToDouble(Console.ReadLine());
+        }
+        else if (ch == 2)
+        {
+            Console.Write("Amount: ");
+            double amt = Convert.ToDouble(Console.ReadLine());
+            if (amt <= balance)
+                balance -= amt;
+        }
+
+        Console.WriteLine("Balance: " + balance);
+    }
+}
