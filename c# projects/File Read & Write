@@ -1,0 +1,13 @@
+using System;
+using System.IO;
+
+class FileIO
+{
+    static void Main()
+    {
+        File.WriteAllText("data.txt", "Hello C# File Handling");
+        string text = File.ReadAllText("data.txt");
+
+        Console.WriteLine(text);
+    }
+}
