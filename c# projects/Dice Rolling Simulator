@@ -1,0 +1,10 @@
+using System;
+
+class Dice
+{
+    static void Main()
+    {
+        Random r = new Random();
+        Console.WriteLine("Dice Roll: " + r.Next(1, 7));
+    }
+}
