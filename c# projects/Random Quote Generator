@@ -1,0 +1,18 @@
+using System;
+
+class Quotes
+{
+    static void Main()
+    {
+        string[] quotes =
+        {
+            "Practice makes perfect",
+            "Code is power",
+            "Never stop learning",
+            "Consistency is key"
+        };
+
+        Random r = new Random();
+        Console.WriteLine(quotes[r.Next(quotes.Length)]);
+    }
+}
