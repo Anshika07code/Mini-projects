@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+
+class Todo
+{
+    static void Main()
+    {
+        List<string> tasks = new List<string>();
+
+        while (true)
+        {
+            Console.WriteLine("\n1. Add Task");
+            Console.WriteLine("2. View Tasks");
+            Console.WriteLine("3. Exit");
+
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            if (choice == 1)
+            {
+                Console.Write("Enter task: ");
+                tasks.Add(Console.ReadLine());
+            }
+            else if (choice == 2)
+            {
+                foreach (var task in tasks)
+                    Console.WriteLine("- " + task);
+            }
+            else
+                break;
+        }
+    }
+}
