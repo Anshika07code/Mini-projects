@@ -1,0 +1,41 @@
+using System;
+
+class ATM
+{
+    static double balance = 10000;
+
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("\n1. Check Balance");
+            Console.WriteLine("2. Deposit");
+            Console.WriteLine("3. Withdraw");
+            Console.WriteLine("4. Exit");
+
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            if (choice == 1)
+                Console.WriteLine("Balance: " + balance);
+
+            else if (choice == 2)
+            {
+                Console.Write("Enter amount: ");
+                balance += Convert.ToDouble(Console.ReadLine());
+            }
+
+            else if (choice == 3)
+            {
+                Console.Write("Enter amount: ");
+                double amt = Convert.ToDouble(Console.ReadLine());
+                if (amt <= balance)
+                    balance -= amt;
+                else
+                    Console.WriteLine("Insufficient balance");
+            }
+
+            else
+                break;
+        }
+    }
+}
