@@ -1,0 +1,12 @@
+def grade(avg):
+    if avg >= 85:
+        return "A"
+    elif avg >= 70:
+        return "B"
+    elif avg >= 60:
+        return "C"
+    else:
+        return "D"
+
+df["Grade"] = df["Average"].apply(grade)
+print(df)
