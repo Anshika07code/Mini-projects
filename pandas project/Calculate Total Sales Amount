@@ -1,0 +1,2 @@
+df["Total_Sales"] = df["Quantity"] * df["Price"]
+print(df)
