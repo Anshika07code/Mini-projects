@@ -1,0 +1,12 @@
+import pandas as pd
+
+data = {
+    "Order_ID": [101, 102, 103, 104, 105, 106],
+    "Product": ["Laptop", "Mobile", "Tablet", "Laptop", "Mobile", "Tablet"],
+    "Quantity": [2, 5, 3, 1, 4, 2],
+    "Price": [60000, 20000, 30000, 60000, 20000, 30000],
+    "Month": ["Jan", "Jan", "Feb", "Feb", "Mar", "Mar"]
+}
+
+df = pd.DataFrame(data)
+print(df)
