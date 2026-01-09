@@ -1,0 +1,2 @@
+best_product = product_sales.idxmax()
+print("Best Selling Product:", best_product)
