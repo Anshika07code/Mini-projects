@@ -1,0 +1,2 @@
+df.to_csv("Sales_Report.csv", index=False)
+print("Sales report saved successfully")
