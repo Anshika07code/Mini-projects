@@ -1,0 +1,2 @@
+monthly_sales = df.groupby("Month")["Total_Sales"].sum()
+print(monthly_sales)
