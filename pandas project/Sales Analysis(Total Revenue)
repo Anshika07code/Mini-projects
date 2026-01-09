@@ -1,0 +1,2 @@
+total_revenue = df["Total_Sales"].sum()
+print("Total Revenue:", total_revenue)
