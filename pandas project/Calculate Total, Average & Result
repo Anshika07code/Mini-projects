@@ -1,0 +1,5 @@
+df["Total"] = df["Math"] + df["Science"] + df["English"]
+df["Average"] = df["Total"] / 3
+
+df["Result"] = df["Average"].apply(lambda x: "Pass" if x >= 60 else "Fail")
+print(df)
