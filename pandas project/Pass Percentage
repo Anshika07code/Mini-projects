@@ -1,0 +1,2 @@
+pass_percentage = (df["Result"].value_counts(normalize=True) * 100)
+print(pass_percentage)
