@@ -1,0 +1,2 @@
+topper = df.loc[df["Average"].idxmax()]
+print(topper)
