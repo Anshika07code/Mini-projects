@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Flower Bloom</title>
+<style>
+body {
+  height: 100vh;
+  background: #ffe4e1;
+}
+.flower {
+  position: absolute;
+  font-size: 30px;
+}
+</style>
+</head>
+<body>
+
+<script>
+document.onclick = function(e) {
+  let f = document.createElement("div");
+  f.className = "flower";
+  f.innerHTML = "🌸";
+  f.style.left = e.pageX + "px";
+  f.style.top = e.pageY + "px";
+  document.body.appendChild(f);
+};
+</script>
+
+</body>
+</html>
