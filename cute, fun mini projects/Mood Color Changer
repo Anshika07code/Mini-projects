@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mood Changer</title>
+<style>
+body {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.5s;
+}
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 20px;
+  background: pink;
+  font-size: 18px;
+  cursor: pointer;
+}
+#emoji {
+  font-size: 60px;
+  margin: 20px;
+}
+</style>
+</head>
+<body>
+
+<h2>Mood Changer</h2>
+<div id="emoji">😊</div>
+<button onclick="changeMood()">Change Mood</button>
+
+<script>
+function changeMood() {
+  const colors = ["#FFD1DC", "#C1E1C1", "#FDFD96", "#AEC6CF"];
+  const emojis = ["😊", "🥰", "😎", "🤩"];
+  document.body.style.backgroundColor =
+    colors[Math.floor(Math.random() * colors.length)];
+  document.getElementById("emoji").innerHTML =
+    emojis[Math.floor(Math.random() * emojis.length)];
+}
+</script>
+
+</body>
+</html>
