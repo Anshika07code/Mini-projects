@@ -1,0 +1,10 @@
+mood = input("How are you feeling? ")
+
+if mood == "happy":
+    print("😊 Stay smiling!")
+elif mood == "sad":
+    print("😢 Everything will be okay!")
+elif mood == "angry":
+    print("😡 Take a deep breath")
+else:
+    print("😄 Keep going!")
