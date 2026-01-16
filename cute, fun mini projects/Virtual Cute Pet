@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Virtual Pet</title>
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+}
+.pet {
+  font-size: 80px;
+}
+button {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2>My Cute Pet</h2>
+<div class="pet" id="pet">😺</div>
+
+<button onclick="feed()">Feed 🍕</button>
+<button onclick="play()">Play 🎾</button>
+
+<script>
+function feed() {
+  document.getElementById("pet").innerHTML = "😻";
+}
+function play() {
+  document.getElementById("pet").innerHTML = "😸";
+}
+</script>
+
+</body>
+</html>
