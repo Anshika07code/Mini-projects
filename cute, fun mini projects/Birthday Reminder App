@@ -1,0 +1,21 @@
+birthdays = {}
+
+while True:
+    print("\n1. Add Birthday")
+    print("2. View Birthdays")
+    print("3. Exit")
+
+    choice = input("Choose: ")
+
+    if choice == "1":
+        name = input("Name: ")
+        date = input("Birthday (DD-MM): ")
+        birthdays[name] = date
+        print("🎉 Birthday Saved!")
+    
+    elif choice == "2":
+        for name, date in birthdays.items():
+            print(f"{name} 🎂 {date}")
+    
+    elif choice == "3":
+        break
