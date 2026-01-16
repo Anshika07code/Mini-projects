@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compliment</title>
+<style>
+body {
+  text-align: center;
+  font-family: Poppins;
+}
+</style>
+</head>
+<body>
+
+<h2>Compliment Generator 💖</h2>
+<button onclick="give()">Click Me</button>
+<p id="c"></p>
+
+<script>
+let compliments = [
+  "You are amazing 🌟",
+  "You look cute today 😊",
+  "You are super smart 🧠",
+  "You make people smile 😄"
+];
+function give() {
+  c.innerHTML =
+    compliments[Math.floor(Math.random()*compliments.length)];
+}
+</script>
+
+</body>
+</html>
