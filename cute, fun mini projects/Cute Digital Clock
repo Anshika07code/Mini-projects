@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Clock</title>
+<style>
+body {
+  text-align: center;
+  font-family: Poppins;
+  font-size: 40px;
+}
+</style>
+</head>
+<body>
+
+<h2>My Clock ⏰</h2>
+<div id="clock"></div>
+
+<script>
+setInterval(() => {
+  let t = new Date().toLocaleTimeString();
+  document.getElementById("clock").innerHTML = t + " 🌙";
+}, 1000);
+</script>
+
+</body>
+</html>
