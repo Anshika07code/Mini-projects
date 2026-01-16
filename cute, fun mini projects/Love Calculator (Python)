@@ -1,0 +1,7 @@
+import random
+
+name1 = input("Your Name: ")
+name2 = input("Partner Name: ")
+
+love = random.randint(50, 100)
+print(f"💖 Love Score between {name1} & {name2}: {love}% 💖")
