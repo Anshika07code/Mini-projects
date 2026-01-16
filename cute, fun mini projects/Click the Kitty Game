@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Click the Kitty</title>
+<style>
+body {
+  text-align: center;
+  font-family: Poppins;
+}
+#kitty {
+  font-size: 60px;
+  position: absolute;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h2>Click the Kitty 🐱</h2>
+<p>Score: <span id="score">0</span></p>
+<div id="kitty" onclick="hit()">🐱</div>
+
+<script>
+let score = 0;
+function moveKitty() {
+  kitty.style.top = Math.random() * 300 + "px";
+  kitty.style.left = Math.random() * 300 + "px";
+}
+function hit() {
+  score++;
+  document.getElementById("score").innerHTML = score;
+  moveKitty();
+}
+setInterval(moveKitty, 1000);
+</script>
+
+</body>
+</html>
