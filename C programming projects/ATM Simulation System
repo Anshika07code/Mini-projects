@@ -2,7 +2,7 @@
 
 int main() {
     int choice;
-    float balance = 5000, amount;
+    float balance = 5000, amount
 
     do {
         printf("\n---- ATM MENU ----\n");
