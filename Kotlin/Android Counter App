@@ -1,0 +1,6 @@
+var count = 0
+
+button.setOnClickListener {
+    count++
+    textView.text = count.toString()
+}
