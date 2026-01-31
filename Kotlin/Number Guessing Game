@@ -1,0 +1,19 @@
+import kotlin.random.Random
+
+fun main() {
+    val number = Random.nextInt(1, 10)
+    var guess: Int?
+
+    println("Guess a number between 1 and 10")
+
+    do {
+        print("Enter your guess: ")
+        guess = readLine()?.toInt()
+
+        if (guess == number)
+            println("🎉 Correct Guess!")
+        else
+            println("❌ Try Again")
+
+    } while (guess != number)
+}
