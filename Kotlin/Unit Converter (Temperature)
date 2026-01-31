@@ -1,0 +1,7 @@
+fun main() {
+    print("Enter Celsius: ")
+    val c = readLine()!!.toDouble()
+
+    val f = (c * 9 / 5) + 32
+    println("Fahrenheit: $f")
+}
