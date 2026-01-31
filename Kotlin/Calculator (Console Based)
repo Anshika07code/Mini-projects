@@ -1,0 +1,21 @@
+fun main() {
+    print("Enter first number: ")
+    val a = readLine()!!.toDouble()
+
+    print("Enter second number: ")
+    val b = readLine()!!.toDouble()
+
+    println("Choose operation: +  -  *  /")
+    val op = readLine()!!
+
+    val result = when (op) {
+        "+" -> a + b
+        "-" -> a - b
+        "*" -> a * b
+        "/" -> a / b
+        else -> "Invalid operation"
+    }
+
+    println("Result: $result")
+}
+
