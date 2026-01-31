@@ -1,0 +1,24 @@
+fun main() {
+    val tasks = mutableListOf<String>()
+
+    while (true) {
+        println("\n1. Add Task")
+        println("2. View Tasks")
+        println("3. Exit")
+        print("Choose: ")
+
+        when (readLine()!!.toInt()) {
+            1 -> {
+                print("Enter task: ")
+                tasks.add(readLine()!!)
+            }
+            2 -> {
+                println("Tasks:")
+                for ((i, task) in tasks.withIndex()) {
+                    println("${i + 1}. $task")
+                }
+            }
+            3 -> break
+        }
+    }
+}
