@@ -1,4 +1,4 @@
- require 'opencv'
+   require 'opencv'
 include OpenCV
 
 img = CvMat.load("image.jpg")
