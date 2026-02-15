@@ -1,4 +1,4 @@
-      import cv2
+       import cv2
 
 eye = cv2.CascadeClassifier(cv2.data.haarcascades +
                             "haarcascade_eye.xml")
