@@ -1,0 +1,12 @@
+import random
+
+affirmations = [
+    "You are amazing 🌸",
+    "You can do it 💪✨",
+    "You are loved 💖",
+    "Believe in yourself 🌈",
+    "Small progress is still progress 🐣"
+]
+
+print("🌞 Daily Affirmation:")
+print(random.choice(affirmations))
