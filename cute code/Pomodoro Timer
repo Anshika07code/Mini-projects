@@ -1,0 +1,8 @@
+import time
+
+print("🍅 Pomodoro Started (25 mins)")
+
+time.sleep(5)  # use 1500 for real 25 minutes
+print("⏳ Break Time (5 mins)")
+time.sleep(3)  # use 300 for real break
+print("✅ Done!")
