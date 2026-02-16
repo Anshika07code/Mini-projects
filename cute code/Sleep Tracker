@@ -1,0 +1,13 @@
+sleep_data = {}
+
+while True:
+    day = input("Enter day (Mon/Tue...) or exit: ")
+    if day == "exit":
+        break
+
+    hours = float(input("Hours slept: "))
+    sleep_data[day] = hours
+
+print("\n😴 Sleep Report:")
+for d, h in sleep_data.items():
+    print(d, ":", h, "hours")
