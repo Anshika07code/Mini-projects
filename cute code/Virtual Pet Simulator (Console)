@@ -1,0 +1,45 @@
+import time
+
+hunger = 5
+happiness = 5
+
+while True:
+    print("\n🐾 Virtual Pet")
+    print("Hunger:", hunger, "🍗")
+    print("Happiness:", happiness, "😊")
+
+    print("\n1. Feed 🍖")
+    print("2. Play 🎾")
+    print("3. Sleep 😴")
+    print("4. Exit ❌")
+
+    choice = input("Choose: ")
+
+    if choice == "1":
+        hunger = max(0, hunger - 2)
+        print("Pet is eating... 😋")
+
+    elif choice == "2":
+        happiness += 2
+        hunger += 1
+        print("Pet is playing... 🐕🎾")
+
+    elif choice == "3":
+        hunger += 1
+        happiness += 1
+        print("Pet is sleeping... 💤")
+        time.sleep(2)
+
+    elif choice == "4":
+        break
+
+    else:
+        print("Invalid choice!")
+
+    hunger += 1
+    happiness = max(0, happiness - 1)
+
+    if hunger >= 10:
+        print("⚠ Pet is too hungry!")
+    if happiness <= 0:
+        print("⚠ Pet is sad!")
