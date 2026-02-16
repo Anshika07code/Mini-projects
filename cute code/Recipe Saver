@@ -1,0 +1,17 @@
+recipes = {}
+
+while True:
+    name = input("\nRecipe name (or exit): ")
+    if name == "exit":
+        break
+
+    ingredients = input("Ingredients: ")
+    steps = input("Steps: ")
+
+    recipes[name] = {"ingredients": ingredients, "steps": steps}
+
+print("\n📖 Saved Recipes:")
+for r in recipes:
+    print("\n🍲", r)
+    print("Ingredients:", recipes[r]["ingredients"])
+    print("Steps:", recipes[r]["steps"])
