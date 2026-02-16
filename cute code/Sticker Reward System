@@ -1,0 +1,8 @@
+tasks_done = int(input("How many tasks did you complete today? "))
+
+if tasks_done >= 5:
+    print("🎉 You earned a GOLD sticker ⭐")
+elif tasks_done >= 3:
+    print("✨ You earned a SILVER sticker 🥈")
+else:
+    print("🐣 You earned a BRONZE sticker 🥉")
