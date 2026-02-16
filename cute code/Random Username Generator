@@ -1,0 +1,7 @@
+import random
+
+words1 = ["Cute", "Fluffy", "Happy", "Sweet", "Pink"]
+words2 = ["Panda", "Bunny", "Kitten", "Bear", "Duck"]
+
+username = random.choice(words1) + random.choice(words2) + str(random.randint(10,99))
+print("✨ Your Username:", username)
