@@ -1,0 +1,16 @@
+expenses = []
+
+while True:
+    item = input("Enter expense item (or exit): ")
+    if item == "exit":
+        break
+    cost = float(input("Enter cost: "))
+    expenses.append((item, cost))
+
+total = sum(x[1] for x in expenses)
+
+print("\n💸 Expense Report:")
+for i, c in expenses:
+    print(i, "-> Rs.", c)
+
+print("Total =", total)
