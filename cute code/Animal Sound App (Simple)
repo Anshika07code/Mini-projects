@@ -1,0 +1,9 @@
+sounds = {
+    "cat": "Meow 🐱",
+    "dog": "Woof 🐶",
+    "cow": "Moo 🐮",
+    "duck": "Quack 🦆"
+}
+
+animal = input("Enter animal name: ").lower()
+print(sounds.get(animal, "Unknown animal 😭"))
