@@ -1,0 +1,13 @@
+moods = {}
+
+while True:
+    date = input("\nEnter date (YYYY-MM-DD) or 'exit': ")
+    if date == "exit":
+        break
+
+    mood = input("Enter mood 😊😢😡😴: ")
+    moods[date] = mood
+
+print("\n📅 Mood History:")
+for d, m in moods.items():
+    print(d, "->", m)
