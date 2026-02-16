@@ -1,0 +1,12 @@
+import random
+
+templates = [
+    "Dear {name}, you are my sunshine 🌞💖",
+    "Hey {name}, my heart goes boom boom 💘😳",
+    "{name}, you are the cutest person ever 🥺🌸",
+    "To {name}, you're my favorite notification 📱💞"
+]
+
+name = input("Enter name: ")
+print("\n💌 Love Letter:")
+print(random.choice(templates).format(name=name))
