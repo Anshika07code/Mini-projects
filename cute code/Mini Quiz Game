@@ -1,0 +1,13 @@
+score = 0
+
+print("🐱 Quiz Time!")
+
+q1 = input("What is 2+2? ")
+if q1 == "4":
+    score += 1
+
+q2 = input("Capital of Nepal? ")
+if q2.lower() == "kathmandu":
+    score += 1
+
+print("🎉 Your Score:", score, "/2")
