@@ -1,0 +1,13 @@
+plants = {}
+
+while True:
+    name = input("Plant name (or exit): ")
+    if name == "exit":
+        break
+
+    days = int(input("Water after how many days? "))
+    plants[name] = days
+
+print("\n🌿 Plant Water Schedule:")
+for p, d in plants.items():
+    print(p, "needs water every", d, "days 💧")
