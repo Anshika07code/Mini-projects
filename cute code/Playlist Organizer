@@ -1,0 +1,11 @@
+playlist = []
+
+while True:
+    song = input("Enter song name (or exit): ")
+    if song == "exit":
+        break
+    playlist.append(song)
+
+print("\n🎵 Your Playlist:")
+for s in playlist:
+    print("🎶", s)
