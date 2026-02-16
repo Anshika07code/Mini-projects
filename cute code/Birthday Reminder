@@ -1,0 +1,13 @@
+birthdays = {}
+
+while True:
+    name = input("Name (or exit): ")
+    if name == "exit":
+        break
+
+    date = input("Birthday (DD-MM): ")
+    birthdays[name] = date
+
+print("\n🎂 Birthday List:")
+for n, d in birthdays.items():
+    print(n, "->", d)
